@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'summernote-rails', git: 'https://github.com/summernote/summernote-rails.git', branch: 'master'
+# gem 'summernote-rails', '~> 0.8.3.0'
 gem 'bootstrap-sass'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'carrierwave', '~> 1.0'

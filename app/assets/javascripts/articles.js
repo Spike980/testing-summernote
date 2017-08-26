@@ -6,7 +6,7 @@ function ready() {
 	$('#summernote').summernote({
 	  'height': 200,
 	  'shortcuts': false,
-      'fontNames': ['Open Sans', 'Noto Sans'],
+      'fontNames': ['Verdana', 'Open Sans', 'Noto Sans'],
       'fontNamesIgnoreCheck': ['Open Sans', 'Noto Sans'],
 	  'linkTargetBlank': true,
       'styleTags': ['p', 'blockquote', 'h3', 'h4', 'h5', 'h6'],
@@ -37,6 +37,23 @@ function ready() {
         
         
         callbacks: {
+          onInit: function() {
+          	// load saved draft if not nil
+          	// after submission of article remove empty draft for user from database
+          },
+          onFocus: function() {
+          	prevValue = (typeof prevValue === 'undefined')? '' : prevValue
+          	interval = setInterval(function() {
+	          	currentVal = $("#summernote").summernote('code')
+          		if (prevValue !== currentVal) {
+	          		console.log(currentVal) // call api to submit draft to server with user_ID
+	          		prevValue = $("#summernote").summernote('code')	
+	          	}
+          	}, 30000)
+          },
+          onBlur: function() {
+          	clearInterval(interval)
+          },
           onImageUpload: function(files) {
           	console.log("image upload")
             img = upload_episode_image(this, files[0])
@@ -53,7 +70,6 @@ function ready() {
         
 	})
 
-	$('#summernote').summernote('fontName', 'Open Sans');
 
 }
 

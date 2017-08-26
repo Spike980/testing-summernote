@@ -1,0 +1,2 @@
+module ArticleAssetsHelper
+end
